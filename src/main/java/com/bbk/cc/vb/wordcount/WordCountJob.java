@@ -30,9 +30,9 @@ public class WordCountJob extends Configured implements Tool{
 
         Configuration conf = job.getConfiguration();
         job.setJarByClass(getClass());
-
-        Path in = new Path("s3://courseworkbbk/input");
-        Path out = new Path("s3://courseworkbbk/output/wcjava2");
+        
+        Path in = new Path( ((args.length >0 && args[0] != null) ?args[0]:"s3://courseworkbbk/input"));
+        Path out = new Path( ((args.length >0 && args[1] != null) ?args[1]:"s3://courseworkbbk/output/wcjava2"));
         out.getFileSystem(conf).delete(out,true);
 
         FileInputFormat.setInputPaths(job, in);

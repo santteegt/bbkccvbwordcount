@@ -17,7 +17,9 @@ public class WordCountReducer extends Reducer<Text, IntWritable, Text, IntWritab
     protected void reduce(Text key, Iterable<IntWritable> values, Context context)
             throws IOException, InterruptedException {
 
-        out.set(1);
+    	int count = 0;
+    	for(IntWritable value:values) count += value.get();
+        out.set(count);
         context.write(key, out);
     }
 }
